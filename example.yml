@@ -1,5 +1,18 @@
-GitClone:
-  image: codefreshplugins/cfstep-codecommit
-  environment:
-    - GIT_USER=mygituser
-    - GIT_PASSWORD=#######
+version: '1.0'
+
+steps:
+
+  GitClone:
+    title: cloning AWS codecommit repo
+    description: cloning a git repo from AWS codecommit
+    image: codefreshplugins/cfstep-codecommit
+    environment:
+      - GIT_USER=${{GIT_USER}}
+      - GIT_PASSWORD=${{GIT_PASSWORD}}
+    
+  PrintFileFromRepo:
+    title: printing the content of textfile.txt
+    image: alpine
+    commands:
+      - cd ${{CF_REPO_NAME}}
+      - cat textfile.txt
